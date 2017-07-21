@@ -3,33 +3,36 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      clicked: false
+      videos: exampleVideoData,
+      currentVideo: exampleVideoData[0]
     };
+
+    this.onTitleClick = this.onTitleClick.bind(this);
   }
-  onItemClick() {
+
+  onTitleClick(video) {
     this.setState({
-      clicked: !this.state.clicked
+      currentVideo: video
     });
   }
 
   render() {
     return (
-  
     <div>
-      <nav className="navbar">
-        <div className="col-md-6 offset-md-3">
-          <div><h5><em>search</em> view goes here</h5></div>
+        <nav className="navbar">
+          <div className="col-md-6 offset-md-3">
+            <Search/>
+          </div>
+        </nav>
+        <div className="row">
+          <div className="col-md-7">
+            <VideoPlayer onClick={this.onTitleClick} video={this.state.currentVideo}/>
+          </div>
+          <div className="col-md-5">
+           <div>
+            <VideoList onClick={this.onTitleClick} videos={this.state.videos}/></div>
+          </div>
         </div>
-      </nav>
-      <div className="row">
-        <div className="col-md-7">
-          <VideoPlayer video={exampleVideoData[0]}/>
-        </div>
-        <div className="col-md-5">
-         <div>
-          <VideoList videos={exampleVideoData}/></div>
-        </div>
-      </div>
     </div>
     );
   }
